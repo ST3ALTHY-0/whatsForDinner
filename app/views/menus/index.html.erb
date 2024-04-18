@@ -1,0 +1,20 @@
+<!-- menus/index.html.erb -->
+
+<h1>Menus</h1>
+
+<%= button_to 'Update Menus', '/execute_python', method: :post, class: "update-button" %>
+
+<div class="menus-container">
+  <% @menus.each do |menu| %>
+    <div class="menu">
+      <h2 class="menu-date"><%= menu.date %></h2>
+      <h3 class="menu-time"><%= menu.menu_time %></h3>
+      
+      <ul class="menu-items">
+        <% menu.menu_items.each do |menuitem| %>
+          <li class="menu-item"><%= menuitem.item_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

@@ -8,26 +8,34 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.keys import Keys
 
 import time
+from datetime import date
 
 class MenuItem:
-    def __init__(self, name, calories, time_of_day):
+    def __init__(self, name, calories, time_of_day, date):
         self.name = name
         self.calories = calories
         self.time_of_day = time_of_day
+        self.date = date
     
     def __str__(self):
         return f"{self.name} - {self.calories} "
+    
+    def get_date(self):
+        return self.date
     
 
 
 def print_menu(menu):
     print("-------------------")
+    current_date = lunch_menu[0].get_date()
+    print(f"Menu Date: {current_date}")
     current_time_of_day = None
+    
     for item in menu:
         if item.time_of_day != current_time_of_day:
             print(f"Time of Day: {item.time_of_day}")
             current_time_of_day = item.time_of_day
-        print(item)
+        print("Menu item - ", item)
     print("***************************")
 
     
@@ -90,7 +98,8 @@ def get_menu_items(driver, filter_words=None, time_of_day=None):
         for menu_item_element in menu_items_elements:
             name = menu_item_element.find_element(By.CLASS_NAME, "col-9").text
             calories = menu_item_element.find_element(By.CLASS_NAME, "d-flex").text
-            menu_item = MenuItem(name, calories, time_of_day)
+            date = get_date_of_menu(driver)
+            menu_item = MenuItem(name, calories, time_of_day, date)
 
             if not any(word in name for word in filter_words):
                 menu_items.append(menu_item)
@@ -102,9 +111,42 @@ def get_menu_items(driver, filter_words=None, time_of_day=None):
     time.sleep(1)
     
     return menu_items
+def get_date_of_menu(driver):
+    current_date = date.today()
+    return current_date
+
+
+
+def write_menu_to_file(filename, lunch_menu, dinner_menu, late_night_menu):
+    try:
+        with open(filename, 'r'):
+            pass  # If the file exists, do nothing
+    except FileNotFoundError:
+        with open(filename, 'w'):
+            pass  # Create an empty file if it doesn't exist
+
+    with open(filename, 'a') as file:
+        file.write(f"Date: {date.today()}\n")
+
+        file.write("Menu item = Lunch Menu:\n")
+        for item in lunch_menu:
+            file.write(f"{item}\n")
+
+        file.write(f"\nDate: {date.today()}\n")
+        file.write("Menu item = Dinner Menu:\n")
+        for item in dinner_menu:
+            file.write(f"{item}\n")
+
+        file.write(f"\nDate: {date.today()}\n")
+        file.write("Late Night Menu:\n")
+        for item in late_night_menu:
+            file.write(f"Menu item = {item}\n")
+
+
 
 if __name__ == "__main__":
     lunch_menu, dinner_menu, late_night_menu = main()
+    write_menu_to_file("/home/luke/whatsForDinner/public/menu.txt", lunch_menu, dinner_menu, late_night_menu)
     print_menu(lunch_menu)
     print_menu(dinner_menu)
     print_menu(late_night_menu)

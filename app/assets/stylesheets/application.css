@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+/* Add this CSS to your stylesheets */
+
+.update-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .menus-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .menu {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .menu-date {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .menu-time {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  
+  .menu-items {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
