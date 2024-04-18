@@ -9,6 +9,9 @@ from selenium.webdriver.common.keys import Keys
 
 import time
 from datetime import date
+from datetime import datetime
+
+#Could use multi threading to get all menus at once, would need to open multiple browsers
 
 class MenuItem:
     def __init__(self, name, calories, time_of_day, date):
@@ -45,6 +48,9 @@ def main():
 
     options = Options()
     options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.set_preference('permissions.default.image', 2)
+
     driver = webdriver.Firefox(options=options) 
 
     driver.get(url)
@@ -63,10 +69,10 @@ def main():
         driver.quit()
 
 def select_menu_location(driver, location_name):
-    dropdown_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "locations__BV_toggle_")))
+    dropdown_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "locations__BV_toggle_")))
     dropdown_button.click()
 
-    dropdown_menu_items = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".dropdown-menu.show a")))
+    dropdown_menu_items = WebDriverWait(driver, 3).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".dropdown-menu.show a")))
     for item in dropdown_menu_items:
         if item.text.strip() == location_name:
             item.click()
@@ -74,10 +80,10 @@ def select_menu_location(driver, location_name):
 
 def select_menu_time(driver, time_name, filter_words=None):
     try:
-        second_dropdown_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "periods__BV_toggle_")))
+        second_dropdown_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "periods__BV_toggle_")))
         second_dropdown_button.click()
 
-        dropdown_menu_items = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".dropdown-menu.show a")))
+        dropdown_menu_items = WebDriverWait(driver, 3).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".dropdown-menu.show a")))
         for item in dropdown_menu_items:
             if item.text.strip() == time_name:
                 driver.execute_script("arguments[0].scrollIntoView(true);", item)
@@ -87,7 +93,7 @@ def select_menu_time(driver, time_name, filter_words=None):
     except (StaleElementReferenceException, TimeoutException) as e:
         print(f"An error occurred: {str(e)}")
 
-    time.sleep(1)
+ #   time.sleep(1)
     return get_menu_items(driver, filter_words, time_name)
 
 def get_menu_items(driver, filter_words=None, time_of_day=None):
@@ -108,11 +114,11 @@ def get_menu_items(driver, filter_words=None, time_of_day=None):
         print("Timeout occurred while fetching menu items:", e)
     except Exception as e:
         print("Error occurred while fetching menu items:", e)
-    time.sleep(1)
+   # time.sleep(1)
     
     return menu_items
 def get_date_of_menu(driver):
-    current_date = date.today()
+    current_date = datetime.today().strftime('%d %B %Y')
     return current_date
 
 
@@ -146,7 +152,7 @@ def write_menu_to_file(filename, lunch_menu, dinner_menu, late_night_menu):
 
 if __name__ == "__main__":
     lunch_menu, dinner_menu, late_night_menu = main()
-    write_menu_to_file("/home/luke/whatsForDinner/public/menu.txt", lunch_menu, dinner_menu, late_night_menu)
+    #write_menu_to_file("/home/luke/whatsForDinner/public/menu.txt", lunch_menu, dinner_menu, late_night_menu)
     print_menu(lunch_menu)
     print_menu(dinner_menu)
     print_menu(late_night_menu)

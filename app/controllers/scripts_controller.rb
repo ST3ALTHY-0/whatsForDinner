@@ -1,4 +1,5 @@
 class ScriptsController < ApplicationController
+
   def execute_python
     # Execute the Python script and capture output
     output = `python3 /home/luke/whatsForDinner/lib/assets/IUPUIDiningWebScrapper.py`
@@ -35,4 +36,5 @@ class ScriptsController < ApplicationController
     # Redirect or render response as needed
     redirect_to root_path
   end
+
 end

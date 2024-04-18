@@ -567,3 +567,36 @@ Menu item = Hoagie Roll - 190 cal
 Menu item = Waffle Fries - 250 cal 
 Menu item = Broccoli Sesame Salad - 110 cal 
 Menu item = Barbeque Tofu & Vegetables - 110 cal 
+Date: 2024-04-18
+Menu item = Lunch Menu:
+Sloppy Joe Sandwich - 300 cal 
+Lentil Quinoa Sloppy Joe Sandwich - 360 cal 
+Mashed Potatoes - 170 cal 
+Sauteed Spinach - 50 cal 
+Roasted Tomatoes - 35 cal 
+White Hamburger Bun - 150 cal 
+Hamburger on Bun - 350 cal 
+Grilled Chicken Sandwich - 270 cal 
+Sliced American Cheese - 50 cal 
+Sliced Pepper Jack Cheese - 110 cal 
+
+Date: 2024-04-18
+Menu item = Dinner Menu:
+Chicken and Sausage Jambalaya - 210 cal 
+Tofu Jambalaya - 310 cal 
+Okra and Tomatoes - 50 cal 
+Lemon & Parsley Roasted Cauliflower - 70 cal 
+Sweet Cornbread - 210 cal 
+Hamburger on Bun - 350 cal 
+Hot Dog (large) - 480 cal 
+Sliced Cheddar Cheese - 110 cal 
+Sliced Swiss Cheese - 110 cal 
+Lettuce Leaf - 0 cal 
+
+Date: 2024-04-18
+Late Night Menu:
+Menu item = Bulgogi BBQ Beef - 380 cal 
+Menu item = Hoagie Roll - 190 cal 
+Menu item = Waffle Fries - 250 cal 
+Menu item = Broccoli Sesame Salad - 110 cal 
+Menu item = Barbeque Tofu & Vegetables - 110 cal 
