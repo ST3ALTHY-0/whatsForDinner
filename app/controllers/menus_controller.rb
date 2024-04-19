@@ -1,10 +1,8 @@
 class MenusController < ApplicationController
   def index
-    @menus = Menu.all
-    @menuitems = MenuItem.all
+    @menus = Menu.order(date: :desc, menu_time: :desc).limit(3).includes(:menu_items)
   end
-  
-    def show
-    end
 
+  def show
+  end
 end

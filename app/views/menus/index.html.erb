@@ -1,8 +1,6 @@
 <!-- menus/index.html.erb -->
 
-<h1>Menus</h1>
-
-<%= button_to 'Update Menu', '/execute_python', method: :post, class: "update-button" %>
+<%= button_to "Update Menu", "/execute_python", method: :post, class: "update-button" %>
 
 <div class="menus-container">
   <% @menus.each do |menu| %>
